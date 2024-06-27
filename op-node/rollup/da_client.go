@@ -1,18 +1,16 @@
 package rollup
 
 import (
+	"github.com/rollkit/go-da"
 	"github.com/rollkit/go-da/proxy"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
 )
 
 type DAClient struct {
-	Client *proxy.Client
+	Client da.DA
 }
 
-func NewDAClient(rpc string) (*DAClient, error) {
-	client := proxy.NewClient()
-	err := client.Start(rpc, grpc.WithTransportCredentials(insecure.NewCredentials()))
+func NewDAClient(rpc, authToken string) (*DAClient, error) {
+	client, err := proxy.NewClient(rpc, authToken)
 	if err != nil {
 		return nil, err
 	}

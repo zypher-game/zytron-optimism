@@ -23,8 +23,12 @@ func init() {
 	if daRpc == "" {
 		daRpc = "localhost:26650"
 	}
+	daAuthToken := os.Getenv("OP_BATCHER_DA_AUTH_TOKEN")
+	if daAuthToken == "" {
+		panic("da auth token is nil")
+	}
 	var err error
-	daClient, err = rollup.NewDAClient(daRpc)
+	daClient, err = rollup.NewDAClient(daRpc, daAuthToken)
 	if err != nil {
 		log.Error("celestia: unable to create DA client", "rpc", daRpc, "err", err)
 		panic(err)

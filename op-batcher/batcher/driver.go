@@ -102,10 +102,14 @@ func (l *BatchSubmitter) StartBatchSubmitting() error {
 	go l.loop()
 
 	daRpc := os.Getenv("OP_BATCHER_DA_RPC")
-	if daRpc == "" {
-		daRpc = "localhost:26650"
+	daAuthToken := os.Getenv("OP_BATCHER_DA_AUTH_TOKEN")
+	if daAuthToken == "" {
+		return errors.New("da auth token is nil")
 	}
-	daClient, err := rollup.NewDAClient(daRpc)
+	if daRpc == "" {
+		daRpc = "http://localhost:26650"
+	}
+	daClient, err := rollup.NewDAClient(daRpc, daAuthToken)
 	if err != nil {
 		return err
 	}
