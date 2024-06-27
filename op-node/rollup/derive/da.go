@@ -21,7 +21,7 @@ var daClient *rollup.DAClient
 func init() {
 	daRpc := os.Getenv("OP_NODE_DA_RPC")
 	if daRpc == "" {
-		daRpc = "localhost:26650"
+		daRpc = "http://localhost:26650"
 	}
 	daAuthToken := os.Getenv("OP_BATCHER_DA_AUTH_TOKEN")
 	if daAuthToken == "" {
