@@ -149,7 +149,7 @@ func DataFromEVMTransactions(dsCfg DataSourceConfig, batcherAddr common.Address,
 				switch data[0] {
 				case DerivationVersionCelestia:
 					log.Info("celestia: blob request", "id", hex.EncodeToString(tx.Data()))
-					blobs, err := daClient.Client.Get([][]byte{data[1:]})
+					blobs, err := daClient.Client.Get(context.Background(), [][]byte{data[1:]}, []byte(NodeDaNamespace))
 					if err != nil {
 						return nil, NewResetError(fmt.Errorf("celestia: failed to resolve frame: %w", err))
 					}

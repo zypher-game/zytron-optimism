@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"io"
 	"math/big"
 	_ "net/http/pprof"
@@ -24,6 +25,7 @@ import (
 )
 
 var ErrBatcherNotRunning = errors.New("batcher is not running")
+var BatcherDaNamespace = []byte{}
 
 type L1Client interface {
 	HeaderByNumber(ctx context.Context, number *big.Int) (*types.Header, error)
@@ -103,11 +105,24 @@ func (l *BatchSubmitter) StartBatchSubmitting() error {
 
 	daRpc := os.Getenv("OP_BATCHER_DA_RPC")
 	daAuthToken := os.Getenv("OP_BATCHER_DA_AUTH_TOKEN")
+	daNamespace := os.Getenv("OP_BATCHER_DA_NAMESPACE")
 	if daAuthToken == "" {
 		return errors.New("da auth token is nil")
 	}
+	if daNamespace == "" {
+		return errors.New("da namespace is nil")
+	}
+
+	b, err := hexutil.Decode(daNamespace)
+	if err != nil {
+		fmt.Printf("op node namespace decode err")
+		panic(err)
+	}
+
+	BatcherDaNamespace = b
+
 	if daRpc == "" {
-		daRpc = "http://localhost:26650"
+		return errors.New("da rpc is nil")
 	}
 	daClient, err := rollup.NewDAClient(daRpc, daAuthToken)
 	if err != nil {
@@ -359,7 +374,7 @@ func (l *BatchSubmitter) sendTransaction(txdata txData, queue *txmgr.Queue[txDat
 	// Do the gas estimation offline. A value of 0 will cause the [txmgr] to estimate the gas limit.
 	data := txdata.Bytes()
 
-	ids, _, err := l.daClient.Client.Submit([][]byte{data})
+	ids, err := l.daClient.Client.Submit(context.Background(), [][]byte{data}, -1, []byte(BatcherDaNamespace))
 	if err == nil && len(ids) == 1 {
 		l.Log.Info("celestia: blob successfully submitted", "id", hex.EncodeToString(ids[0]))
 		data = append([]byte{derive.DerivationVersionCelestia}, ids[0]...)

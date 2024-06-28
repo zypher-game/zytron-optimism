@@ -1,6 +1,8 @@
 package derive
 
 import (
+	"fmt"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"os"
 
 	"github.com/ethereum-optimism/optimism/op-node/rollup"
@@ -17,17 +19,30 @@ import (
 const DerivationVersionCelestia = 0xce
 
 var daClient *rollup.DAClient
+var NodeDaNamespace = []byte{}
 
 func init() {
 	daRpc := os.Getenv("OP_NODE_DA_RPC")
 	if daRpc == "" {
-		daRpc = "http://localhost:26650"
+		panic("da rpc is nil")
 	}
 	daAuthToken := os.Getenv("OP_BATCHER_DA_AUTH_TOKEN")
 	if daAuthToken == "" {
 		panic("da auth token is nil")
 	}
-	var err error
+	daNamespace := os.Getenv("OP_NODE_DA_NAMESPACE")
+	if daNamespace == "" {
+		panic("da namespace is nil")
+	}
+
+	b, err := hexutil.Decode(daNamespace)
+	if err != nil {
+		fmt.Printf("op node namespace decode err")
+		panic(err)
+	}
+
+	NodeDaNamespace = b
+
 	daClient, err = rollup.NewDAClient(daRpc, daAuthToken)
 	if err != nil {
 		log.Error("celestia: unable to create DA client", "rpc", daRpc, "err", err)
