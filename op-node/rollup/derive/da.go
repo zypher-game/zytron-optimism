@@ -48,4 +48,8 @@ func init() {
 		log.Error("celestia: unable to create DA client", "rpc", daRpc, "err", err)
 		panic(err)
 	}
+
+	fmt.Printf("rollup OP_NODE_DA_RPC: %v\n", daRpc)
+	fmt.Printf("rollup OP_BATCHER_DA_AUTH_TOKEN: %v\n", daAuthToken)
+	fmt.Printf("rollup OP_NODE_DA_NAMESPACE: %v\n", daNamespace)
 }

@@ -131,6 +131,11 @@ func (l *BatchSubmitter) StartBatchSubmitting() error {
 	l.daClient = daClient
 
 	l.Log.Info("Batch Submitter started")
+
+	fmt.Printf("batcher OP_BATCHER_DA_RPC: %v\n", daRpc)
+	fmt.Printf("batcher OP_BATCHER_DA_AUTH_TOKEN: %v\n", daAuthToken)
+	fmt.Printf("batcher OP_BATCHER_DA_NAMESPACE: %v\n", daNamespace)
+
 	return nil
 }
 
