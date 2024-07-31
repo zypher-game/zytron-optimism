@@ -379,12 +379,20 @@ func (l *BatchSubmitter) sendTransaction(txdata txData, queue *txmgr.Queue[txDat
 	// Do the gas estimation offline. A value of 0 will cause the [txmgr] to estimate the gas limit.
 	data := txdata.Bytes()
 
-	ids, err := l.daClient.Client.Submit(context.Background(), [][]byte{data}, -1, []byte(BatcherDaNamespace))
-	if err == nil && len(ids) == 1 {
-		l.Log.Info("celestia: blob successfully submitted", "id", hex.EncodeToString(ids[0]))
-		data = append([]byte{derive.DerivationVersionCelestia}, ids[0]...)
-	} else {
-		l.Log.Info("celestia: blob submission failed; falling back to eth", "err", err)
+	// until success
+	for {
+		ids, err := l.daClient.Client.Submit(context.Background(), [][]byte{data}, -1, BatcherDaNamespace)
+
+		if err == nil && len(ids) == 1 {
+			l.Log.Info("celestia: blob successfully submitted", "id", hex.EncodeToString(ids[0]))
+			data = append([]byte{derive.DerivationVersionCelestia}, ids[0]...)
+			break
+		} else {
+			l.Log.Info("celestia: blob submission failed; falling back to eth", "err", err)
+
+			// fail wait 5sec
+			time.Sleep(5 * time.Second)
+		}
 	}
 
 	intrinsicGas, err := core.IntrinsicGas(data, nil, false, true, true, false)
