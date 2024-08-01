@@ -40,7 +40,7 @@ jobs:
           type=raw,value={{branch}}-{{sha}}-{{date 'x'}}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v6
       with:
         context: .
         push: true
