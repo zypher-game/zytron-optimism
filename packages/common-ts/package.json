@@ -42,7 +42,7 @@
     "dotenv": "^16.3.1",
     "envalid": "^8.0.0",
     "ethers": "^5.7.2",
-    "express": "^4.18.2",
+    "express": "^4.21.1",
     "express-prom-bundle": "^6.6.0",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
