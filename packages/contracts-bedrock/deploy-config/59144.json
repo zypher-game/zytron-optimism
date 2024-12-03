@@ -2,7 +2,7 @@
   "finalSystemOwner": "0x29ce64aA8C9A132AAFEdf7F4f9e2a90bd8c3d9eA",
   "superchainConfigGuardian": "0x29ce64aA8C9A132AAFEdf7F4f9e2a90bd8c3d9eA",
 
-  "l1StartingBlockTag": "0xcbc2e0427887e134d67e0027866460f7c69f95cd40bb5fe8fe3bab1f3a522997",
+  "l1StartingBlockTag": "0x20a0933f5eb6f339f3cfc3f5824e5f4a9403bee74fc0215145c8cf0828f73c36",
 
   "l1ChainID": 59144,
   "l2ChainID": 9901,
@@ -14,12 +14,12 @@
   "channelTimeout": 300,
 
   "p2pSequencerAddress": "0xb1e3ddb7a79D95C20893A9a41A2322846e676a98",
-  "batchInboxAddress": "0xff00cccc00cccc0aa0cccc000bbbbcccaaaa00AA",
+  "batchInboxAddress": "0xff00cccc00cccc0aa0cccc0AAbbbbcccaaaaccAA",
   "batchSenderAddress": "0xDFE64651ABfFb4eD0869BD974089FCd21D9620F4",
 
   "l2OutputOracleSubmissionInterval": 120,
   "l2OutputOracleStartingBlockNumber": 0,
-  "l2OutputOracleStartingTimestamp": 1732503273,
+  "l2OutputOracleStartingTimestamp": 1733213709,
 
   "l2OutputOracleProposer": "0xf91B805BEAEF06F4FA6df787697C6953B2588332",
   "l2OutputOracleChallenger": "0x29ce64aA8C9A132AAFEdf7F4f9e2a90bd8c3d9eA",
