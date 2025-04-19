@@ -101,7 +101,7 @@ describe('fromHexString', () => {
 })
 
 describe('padHexString', () => {
-  it('should return return input string if length is 2 + length * 2', () => {
+  it('should return input string if length is 2 + length * 2', () => {
     expect(padHexString('abcd', 1)).to.deep.equal('abcd')
     expect(padHexString('abcdefgh', 3).length).to.deep.equal(8)
   })
