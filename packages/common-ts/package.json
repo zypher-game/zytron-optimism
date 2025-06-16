@@ -37,7 +37,7 @@
     "@eth-optimism/core-utils": "workspace:*",
     "@sentry/node": "^7.84.0",
     "bcfg": "^0.2.1",
-    "body-parser": "^1.20.2",
+    "body-parser": "^2.2.0",
     "commander": "^11.1.0",
     "dotenv": "^16.3.1",
     "envalid": "^8.0.0",
