@@ -38,7 +38,7 @@
     "@ethersproject/address": "^5.7.0",
     "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/bytes": "^5.7.0",
-    "@ethersproject/constants": "^5.7.0",
+    "@ethersproject/constants": "^5.8.0",
     "@ethersproject/contracts": "^5.7.0",
     "@ethersproject/keccak256": "^5.7.0",
     "@ethersproject/properties": "^5.7.0",
