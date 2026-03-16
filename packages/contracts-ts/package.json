@@ -80,7 +80,7 @@
     "@testing-library/react": "^14.1.2",
     "@types/change-case": "^2.3.1",
     "change-case": "4.1.2",
-    "react": "^18.2.0",
+    "react": "^19.2.4",
     "react-dom": "^18.2.0",
     "viem": "^1.19.11"
   }
