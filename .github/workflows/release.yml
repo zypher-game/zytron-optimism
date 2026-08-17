@@ -51,7 +51,7 @@ jobs:
       # merged will publish to npm
       # see https://github.com/changesets/action
       - name: Publish To NPM or Create Release Pull Request
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         id: changesets
         with:
           createGithubReleases: false
