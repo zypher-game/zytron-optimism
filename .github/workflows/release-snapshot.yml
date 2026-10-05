@@ -30,7 +30,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish snapshots
-        uses: seek-oss/changesets-snapshot@v0
+        uses: seek-oss/changesets-snapshot@v1
         with:
           pre-publish: pnpm nx run-many --target=build --skip-nx-cache
         env:
